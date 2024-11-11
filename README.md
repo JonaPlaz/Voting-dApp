@@ -44,3 +44,8 @@ puis :
 ```
 yarn install
 ```
+#### Lancement du front : 
+
+```
+yarn run dev
+```
