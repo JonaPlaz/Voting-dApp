@@ -49,3 +49,34 @@ yarn install
 ```
 yarn run dev
 ```
+
+## Consignes et Notation
+
+### Consignes
+-   Smart Contract (Backend)
+    -   ajouter NatSpecs au Smart Contract
+    -   faille sur Smart Contract à détecter et corriger
+-   dApp (Frontend)
+    -   l’enregistrement d’une liste blanche d'électeurs. 
+    -   à l'administrateur de commencer la session d'enregistrement de la proposition.
+    -   aux électeurs inscrits d’enregistrer leurs propositions.
+    -   à l'administrateur de mettre fin à la session d'enregistrement des propositions.
+    -   à l'administrateur de commencer la session de vote.
+    -   aux électeurs inscrits de voter pour leurs propositions préférées.
+    -   à l'administrateur de mettre fin à la session de vote.
+    -   à l'administrateur de comptabiliser les votes.
+    -   à tout le monde de consulter le résultat.
+-   Git
+    -   tirer des branches de features depuis "develop" et à merger sur develop
+    -   à la fin, merge sur main et déploiement de main sur Vercel
+
+
+### Notation
+-   appel des fonctions sur Smart Contract via la dApp
+-   revoir code solidity (faille, NatSpec)
+-   utilisation d'event
+-   Affichage du compte utilisé et des proposals
+-   Video du workflow
+-   Déployer sur serveur public
+-   Affichage adapté au compte utilisé
+-   Front travaillé
