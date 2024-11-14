@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+.app {
+  @apply flex flex-col min-h-screen;
+}
+
+.navbar {
+  @apply flex-between p-10;
+}
+
+.main {
+  @apply p-10 grow;
+}
+
+.footer {
+  @apply w-full flex-center p-10;
+}
+
+.flex-between {
+  @apply flex justify-between items-center;
+}
+
+.flex-center {
+  @apply flex justify-center items-center;
+}
+
+.title {
+  @apply text-4xl mb-4;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
