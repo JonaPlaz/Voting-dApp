@@ -10,11 +10,21 @@ const Owner = () => {
     <>
       <h1 className="title flex-center">Owner</h1>
       <AddVoter />
-      <StartProposalsRegistering />
-      <EndProposalsRegistering />
-      <StartVotingSession />
-      <EndVotingSession />
-      <TallyVotes />
+      <div className="flex flex-row justify-evenly mb-8">
+        <div className="w-2/5 bg-slate-200 p-6 rounded-md">
+          <h2 className="text-2xl mb-4 font-semibold">PROPOSALS</h2>
+          <StartProposalsRegistering />
+          <EndProposalsRegistering />
+        </div>
+        <div className="w-2/5 bg-slate-200 p-6 rounded-md">
+          <h2 className="text-2xl mb-4 font-semibold">VOTING</h2>
+          <StartVotingSession />
+          <EndVotingSession />
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <TallyVotes />
+      </div>
     </>
   );
 };
