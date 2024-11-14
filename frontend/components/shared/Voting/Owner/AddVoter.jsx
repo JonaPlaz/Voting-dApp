@@ -31,8 +31,21 @@ const AddVoter = () => {
 
   return (
     <>
-      <div className="mb-8">
+      <div className="mb-6">
         <h2 className="text-2xl mb-4">Ajouter un votant</h2>
+        <div className="flex items-center mb-4">
+          <Input placeholder="Adresse" onChange={(e) => setAddress(e.target.value)} value={address} />
+          <Button
+            disabled={addIsPending}
+            onClick={() => {
+              handleAddVoter();
+              setAddress("");
+            }}
+            className="px-12"
+          >
+            {addIsPending ? "En cours d'ajout" : "Add"}
+          </Button>
+        </div>
         <div className="flex flex-col w-full">
           {hash && (
             <Alert className="mb-4 bg-lime-200">
@@ -59,17 +72,11 @@ const AddVoter = () => {
             </Alert>
           )}
           {error && (
-            <Alert className="mb-4 bg-lime-200">
+            <Alert className="bg-lime-200">
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{error.shortMessage || error.message}</AlertDescription>
             </Alert>
           )}
-        </div>
-        <div className="flex items-center">
-          <Input placeholder="Adresse" onChange={(e) => setAddress(e.target.value)} value={address} />
-          <Button disabled={addIsPending} onClick={handleAddVoter}>
-            {addIsPending ? "En cours d'ajout" : "Add"}
-          </Button>
         </div>
       </div>
     </>
