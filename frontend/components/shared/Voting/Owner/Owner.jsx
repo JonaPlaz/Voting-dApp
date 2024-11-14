@@ -3,7 +3,7 @@ import AddVoter from "./AddVoter";
 const Owner = () => {
   return (
     <>
-      <div>Owner</div>
+      <h1 className="title flex-center">Owner</h1>
       <AddVoter />
     </>
   );
