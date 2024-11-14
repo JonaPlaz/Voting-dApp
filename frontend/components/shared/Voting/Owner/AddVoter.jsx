@@ -32,9 +32,9 @@ const AddVoter = () => {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-2xl mb-4">Ajouter un votant</h2>
+        <h2 className="text-2xl mb-4">Add voter</h2>
         <div className="flex items-center mb-4">
-          <Input placeholder="Adresse" onChange={(e) => setAddress(e.target.value)} value={address} />
+          <Input className="mr-2" placeholder="Adresse" onChange={(e) => setAddress(e.target.value)} value={address} />
           <Button
             disabled={addIsPending}
             onClick={() => {
