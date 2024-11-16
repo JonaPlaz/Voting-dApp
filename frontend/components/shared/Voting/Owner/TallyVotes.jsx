@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-import { useWriteContract, useWaitForTransactionReceipt, useReadContract } from "wagmi";
+import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 
 import { contractAddress, contractAbi } from "@/constants";
 
@@ -16,7 +16,7 @@ const TallyVotes = () => {
     });
   };
 
-  const { isLoading: isConfirming, isSuccess, error: erroConfirmation } = useWaitForTransactionReceipt({ hash });
+  const { isLoading: isConfirming, isSuccess, error: errorConfirmation } = useWaitForTransactionReceipt({ hash });
 
   return (
     <>
@@ -46,10 +46,10 @@ const TallyVotes = () => {
               <AlertDescription>Transaction Confirmed.</AlertDescription>
             </Alert>
           )}
-          {erroConfirmation && (
+          {errorConfirmation && (
             <Alert className="mb-4 bg-lime-200">
               <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{erroConfirmation.shortMessage || erroConfirmation.message}</AlertDescription>
+              <AlertDescription>{errorConfirmation.shortMessage || errorConfirmation.message}</AlertDescription>
             </Alert>
           )}
           {error && (

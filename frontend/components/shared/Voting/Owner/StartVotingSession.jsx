@@ -16,7 +16,7 @@ const StartVotingSession = () => {
     });
   };
 
-  const { isLoading: isConfirming, isSuccess, error: erroConfirmation } = useWaitForTransactionReceipt({ hash });
+  const { isLoading: isConfirming, isSuccess, error: errorConfirmation } = useWaitForTransactionReceipt({ hash });
 
   return (
     <>
@@ -46,10 +46,10 @@ const StartVotingSession = () => {
               <AlertDescription>Transaction Confirmed.</AlertDescription>
             </Alert>
           )}
-          {erroConfirmation && (
+          {errorConfirmation && (
             <Alert className="mb-4 bg-lime-200">
               <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{erroConfirmation.shortMessage || erroConfirmation.message}</AlertDescription>
+              <AlertDescription>{errorConfirmation.shortMessage || errorConfirmation.message}</AlertDescription>
             </Alert>
           )}
           {error && (

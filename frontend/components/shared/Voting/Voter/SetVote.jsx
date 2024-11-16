@@ -1,18 +1,25 @@
+"useClient";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 
 import { contractAddress, contractAbi } from "@/constants";
 
-const EndProposalsRegistering = () => {
-  const { data: hash, error, isPending: goIsPending, writeContract } = useWriteContract({});
+const SetVote = () => {
+  const [proposalId, setProposalId] = useState("");
 
-  const handleEndProposalsRegistering = async () => {
+  const { data: hash, error, isPending: setIsPending, writeContract } = useWriteContract({});
+
+  const handleSetVote = async () => {
     writeContract({
       address: contractAddress,
       abi: contractAbi,
-      functionName: "endProposalsRegistering",
+      functionName: "setVote",
+      args: [proposalId],
     });
   };
 
@@ -21,10 +28,23 @@ const EndProposalsRegistering = () => {
   return (
     <>
       <div className="mb-6">
-        <div className="flex flex-row justify-between mb-4">
-          <h2 className="text-2xl mr-4">End proposals registering</h2>
-          <Button className="w-20" disabled={goIsPending} onClick={handleEndProposalsRegistering}>
-            {goIsPending ? "in progress.." : "End"}
+        <h2 className="text-2xl mb-4">Set vote</h2>
+        <div className="flex items-center mb-4">
+          <Input
+            className="mr-2"
+            placeholder="Proposal description"
+            onChange={(e) => setProposalId(e.target.value)}
+            value={proposalId}
+          />
+          <Button
+            disabled={setIsPending}
+            onClick={() => {
+                handleSetVote();
+              setProposalId("");
+            }}
+            className="px-12"
+          >
+            {setIsPending ? "En cours d'ajout" : "Vote"}
           </Button>
         </div>
         <div className="flex flex-col w-full">
@@ -64,4 +84,4 @@ const EndProposalsRegistering = () => {
   );
 };
 
-export default EndProposalsRegistering;
+export default SetVote;

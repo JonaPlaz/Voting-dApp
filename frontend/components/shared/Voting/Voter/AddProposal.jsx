@@ -1,18 +1,25 @@
+"useClient";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 
 import { contractAddress, contractAbi } from "@/constants";
 
-const EndProposalsRegistering = () => {
-  const { data: hash, error, isPending: goIsPending, writeContract } = useWriteContract({});
+const AddProposal = () => {
+  const [description, setDescription] = useState("");
 
-  const handleEndProposalsRegistering = async () => {
+  const { data: hash, error, isPending: addIsPending, writeContract } = useWriteContract({});
+
+  const handleAddProposal = async () => {
     writeContract({
       address: contractAddress,
       abi: contractAbi,
-      functionName: "endProposalsRegistering",
+      functionName: "addProposal",
+      args: [description],
     });
   };
 
@@ -21,10 +28,18 @@ const EndProposalsRegistering = () => {
   return (
     <>
       <div className="mb-6">
-        <div className="flex flex-row justify-between mb-4">
-          <h2 className="text-2xl mr-4">End proposals registering</h2>
-          <Button className="w-20" disabled={goIsPending} onClick={handleEndProposalsRegistering}>
-            {goIsPending ? "in progress.." : "End"}
+        <h2 className="text-2xl mb-4">Add proposal</h2>
+        <div className="flex items-center mb-4">
+          <Input className="mr-2" placeholder="Proposal description" onChange={(e) => setDescription(e.target.value)} value={description} />
+          <Button
+            disabled={addIsPending}
+            onClick={() => {
+              handleAddProposal();
+              setDescription("");
+            }}
+            className="px-12"
+          >
+            {addIsPending ? "En cours d'ajout" : "Add"}
           </Button>
         </div>
         <div className="flex flex-col w-full">
@@ -64,4 +79,4 @@ const EndProposalsRegistering = () => {
   );
 };
 
-export default EndProposalsRegistering;
+export default AddProposal;
