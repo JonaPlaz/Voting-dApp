@@ -2,7 +2,7 @@ import AddVoter from "./AddVoter";
 import StartProposalsRegistering from "./StartProposalsRegistering";
 import EndProposalsRegistering from "./EndProposalsRegistering";
 import StartVotingSession from "./StartVotingSession";
-import EndVotingSession from "./endVotingSession";
+import EndVotingSession from "./EndVotingSession";
 import TallyVotes from "./TallyVotes";
 
 const Owner = () => {

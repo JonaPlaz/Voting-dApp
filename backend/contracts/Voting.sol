@@ -84,6 +84,9 @@ contract Voting is Ownable {
     /// @param proposalId The ID of the proposal that was voted for
     event Voted(address voter, uint proposalId);
 
+    /// @notice Maximum number of proposals that can be registered
+    uint public constant MAX_PROPOSALS = 100;
+
     /**
      * @dev Sets the contract deployer as the owner
      */
@@ -144,13 +147,17 @@ contract Voting is Ownable {
 
     /**
      * @notice Adds a proposal
-     * @dev Can only be called by registered voters and during the proposal registration phase
-     * @param _desc The description of the proposal
+     * @dev Can only be called by registered voters and during the proposal registration phase. the number of proposals must not exceed the maximum allowed.
+     * @param _desc The description of the proposal must not be empty
      */
     function addProposal(string calldata _desc) external onlyVoters {
         require(
             workflowStatus == WorkflowStatus.ProposalsRegistrationStarted,
             "Proposals are not allowed yet"
+        );
+        require(
+            proposalsArray.length < MAX_PROPOSALS,
+            "Maximum number of proposals reached"
         );
         require(
             keccak256(abi.encode(_desc)) != keccak256(abi.encode("")),

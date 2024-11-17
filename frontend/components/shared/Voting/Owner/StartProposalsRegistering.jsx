@@ -1,7 +1,11 @@
+"use client";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import { useWriteContract, useWaitForTransactionReceipt, useWatchContractEvent } from "wagmi";
 
 import { contractAddress, contractAbi } from "@/constants";
 
@@ -17,6 +21,26 @@ const StartProposalsRegistering = () => {
   };
 
   const { isLoading: isConfirming, isSuccess, error: errorConfirmation } = useWaitForTransactionReceipt({ hash });
+
+  const [hasDisplayed, setHasDisplayed] = useState(false);
+
+  useWatchContractEvent({
+    address: contractAddress,
+    abi: contractAbi,
+    eventName: "WorkflowStatusChange",
+    onLogs: (logs) => {
+      if (!hasDisplayed && logs[0]?.args?.newStatus === 1) {
+        setHasDisplayed(true);
+        toast({
+          title: "Status Changed",
+          description: "Proposals Registering Started",
+          className: "bg-lime-200",
+        });
+      }
+    },
+  });
+
+  const { toast } = useToast();
 
   return (
     <>

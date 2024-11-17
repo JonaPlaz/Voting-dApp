@@ -1,7 +1,11 @@
+"use client";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import { useWriteContract, useWaitForTransactionReceipt, useWatchContractEvent } from "wagmi";
 
 import { contractAddress, contractAbi } from "@/constants";
 
@@ -16,7 +20,27 @@ const TallyVotes = () => {
     });
   };
 
-  const { isLoading: isConfirming, isSuccess, error: errorConfirmation } = useWaitForTransactionReceipt({ hash });
+  const { isLoading: isConfirming, isSuccess, error: erroConfirmation } = useWaitForTransactionReceipt({ hash });
+
+  const [hasDisplayed, setHasDisplayed] = useState(false);
+
+  useWatchContractEvent({
+    address: contractAddress,
+    abi: contractAbi,
+    eventName: "WorkflowStatusChange",
+    onLogs: (logs) => {
+      if (!hasDisplayed && logs[0]?.args?.newStatus === 5) {
+        setHasDisplayed(true);
+        toast({
+          title: "Status Changed",
+          description: "Votes Tallied",
+          className: "bg-lime-200",
+        });
+      }
+    },
+  });
+
+  const { toast } = useToast();
 
   return (
     <>
@@ -46,10 +70,10 @@ const TallyVotes = () => {
               <AlertDescription>Transaction Confirmed.</AlertDescription>
             </Alert>
           )}
-          {errorConfirmation && (
+          {erroConfirmation && (
             <Alert className="mb-4 bg-lime-200">
               <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{errorConfirmation.shortMessage || errorConfirmation.message}</AlertDescription>
+              <AlertDescription>{erroConfirmation.shortMessage || erroConfirmation.message}</AlertDescription>
             </Alert>
           )}
           {error && (
