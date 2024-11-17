@@ -80,3 +80,18 @@ yarn run dev
 -   Déployer sur serveur public
 -   Affichage adapté au compte utilisé
 -   Front travaillé
+
+
+## Liens
+
+### Videos
+https://www.loom.com/share/9a2e5d7b0e1a44319da0ff2491a19353?sid=cf7b702b-75f0-4a0d-ab03-a1c02b03635d
+
+winningId (pb d'affichage)
+https://www.loom.com/share/778c3bc3cfde43c0be888c23c4846172?sid=67373648-fc8d-4d6e-8be4-fc9131cf71ee
+
+### Frontend déployé
+https://github.com/JonaPlaz/Deploy-Voting-Frontend
+
+### Contrat (natspecs + faille)
+https://github.com/JonaPlaz/Voting-dApp/blob/main/backend/contracts/Voting.sol
