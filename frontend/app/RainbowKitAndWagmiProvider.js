@@ -6,10 +6,7 @@ import {
     RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
-import {
-    holesky,
-    hardhat,
-} from 'wagmi/chains';
+import { holesky } from '@/utils/holesky';
 import {
     QueryClientProvider,
     QueryClient,
@@ -18,7 +15,7 @@ import {
 const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'acc3751b327dc54ae858c65b00a5150a',
-    chains: [holesky, hardhat],
+    chains: [holesky],
     ssr: true, // If your dApp uses server side rendering (SSR)
 });
 

@@ -1,7 +1,9 @@
 import { createPublicClient, http } from 'viem'
-import { hardhat, holesky } from 'viem/chains'
+import { holesky } from 'viem/chains'
 
-export const publicClient = createPublicClient({ 
-  chain: hardhat,
-  transport: http()
+const RPC = process.env.NEXT_PUBLIC_HOLESKY_RPC || "";
+
+export const publicClient = createPublicClient({
+  chain: holesky,
+  transport: http(RPC),
 })
