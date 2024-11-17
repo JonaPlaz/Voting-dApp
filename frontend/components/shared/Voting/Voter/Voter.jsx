@@ -7,8 +7,8 @@ const Voter = () => {
   return (
     <>
       <GetVoter />
-      <GetOneProposal />
       <AddProposal />
+      <GetOneProposal />
       <SetVote />
     </>
   );
