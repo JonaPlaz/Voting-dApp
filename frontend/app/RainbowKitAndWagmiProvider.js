@@ -7,6 +7,7 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { holesky } from '@/utils/holesky';
+import { sepolia } from '@/utils/sepolia';
 import {
     QueryClientProvider,
     QueryClient,
@@ -15,7 +16,7 @@ import {
 const config = getDefaultConfig({
     appName: 'My RainbowKit App',
     projectId: 'acc3751b327dc54ae858c65b00a5150a',
-    chains: [holesky],
+    chains: [holesky, sepolia],
     ssr: true, // If your dApp uses server side rendering (SSR)
 });
 
